@@ -1,0 +1,44 @@
+services:
+  backend:
+    build: ../backend
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASSWORD=password
+      - DB_NAME=challenge-full-stack-web-db
+    volumes:
+      - ../backend:/app # Mount local code to container
+      - /app/node_modules # Prevent conflicts
+    command: ["npm", "run", "dev"] # Development command
+    depends_on:
+      - mysql
+
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - NODE_ENV=development
+  #   volumes:
+  #     - ./frontend:/app # Mount local code to container
+  #     - /app/node_modules # Prevent conflicts
+  #   command: ["npm", "run", "dev"] # Development command
+  #   depends_on:
+  #     - backend
+
+  mysql:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=challenge-full-stack-web-db
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ../database/mysql-init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  mysql_data:
