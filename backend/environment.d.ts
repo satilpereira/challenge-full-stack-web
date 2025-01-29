@@ -13,19 +13,6 @@ declare global {
       DB_USER: string;
       DB_PASSWORD: string;
       DB_NAME: string;
-
-      // AWS configuration
-      ACC_AWS_BUCKET_NAME?: string;
-      ACC_AWS_REGION?: string;
-      ACC_AWS_ACCESS_KEY?: string;
-      ACC_AWS_SECRET_ACCESS_KEY?: string;
-
-      // SMTP configuration
-      SMTP_DOMAIN?: string;
-      SMTP_PASSWORD?: string;
-      SMTP_HOST?: string;
-      SMTP_EMAIL?: string;
-      SMTP_PORT?: string;
     }
   }
 }
