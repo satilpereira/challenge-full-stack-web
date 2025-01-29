@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
+import Database from './config/Database';
 
 const xss = require('xss-clean');
 
@@ -12,6 +13,8 @@ serverV1.use(cors());
 serverV1.use(xss());
 
 serverV1.get('/', (req: Request, res: Response) => {
+  const database = Database.getInstance();
+  database.testConnection();
   res.send('Hello World');
 });
 

@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["prismaSchemaFolder"]
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DB_URL")
+}
+
+
+model Student {
+  id    Int     @id @default(autoincrement())
+  email String
+  ra    String  @unique
+  name  String
+}
+
+
+// Add your models here

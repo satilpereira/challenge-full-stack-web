@@ -5,6 +5,12 @@ dotenv.config();
 const envVars = {
   PORT: 'PORT',
   NODE_ENV: 'NODE_ENV',
+  DB_HOST: 'DB_HOST',
+  DB_PORT: 'DB_PORT',
+  DB_USER: 'DB_USER',
+  DB_PASSWORD: 'DB_PASSWORD',
+  DB_NAME: 'DB_NAME',
+  DB_URL: 'DB_URL',
 } as const;
 
 type EnvVars = typeof envVars;
