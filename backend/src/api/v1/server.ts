@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
+import Database from '@configs/Database';
 
 const xss = require('xss-clean');
 
@@ -11,8 +12,8 @@ serverV1.use(cors());
 
 serverV1.use(xss());
 
-serverV1.get('/', (req: Request, res: Response) => {
-  res.send('Hello World');
+serverV1.get('/', async (req: Request, res: Response) => {
+  res.send('Hello, World!');
 });
 
 export default serverV1;

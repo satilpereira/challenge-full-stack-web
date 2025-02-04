@@ -23,6 +23,7 @@
       "@services/*": ["src/api/v1/services/*"],
       "@swgout": ["swagger-output.json"],
       "@server": ["src/api/v1/server.ts"],
+      "@configs": ["src/api/v1/configs"],
       "@utils/*": ["src/api/v1/utils/*"]
     }
   },
