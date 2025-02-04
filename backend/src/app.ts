@@ -2,6 +2,7 @@ import serverV1 from '@server';
 // import { routesExec } from '@routes/index';
 import Env from '@utils/Env';
 import chalk from 'chalk';
+import { routesExec } from '@routes/index';
 
 const log = console.log;
 
@@ -9,8 +10,8 @@ Env.validate();
 
 const PORT = Env.get('PORT');
 
-// routesExec();
-// Runs version 1 API Endpoints
+routesExec();
+
 serverV1.listen(PORT, () => {
   log(
     chalk.green(
