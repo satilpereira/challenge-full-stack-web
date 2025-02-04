@@ -1,3 +1,8 @@
 <template>
-  <div class="">Hello Nuxt.js!</div>
+  <NuxtLayout>
+    <v-app>
+      <Navbar />
+      <NuxtPage />
+    </v-app>
+  </NuxtLayout>
 </template>
