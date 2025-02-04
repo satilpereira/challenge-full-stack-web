@@ -15,6 +15,9 @@ model Student {
   email String
   ra    String  @unique
   name  String
+  cpf   String
+
+  @@map("col_students") // Renames collection to "col_students"
 }
 
 
