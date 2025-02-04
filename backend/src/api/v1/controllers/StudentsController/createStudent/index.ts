@@ -4,6 +4,7 @@ import { ExpressControllerFunction } from '@controllers/types';
 import HttpStatusCode from '@constants/HttpStatusCode';
 import ResponseHelper from '@helpers/ResponseHelper';
 import { createStudentSchema } from '@controllers/StudentsController/createStudent/schema';
+import { setuid } from 'process';
 
 const studentsModel = new StudentsModel();
 
@@ -16,26 +17,40 @@ export const createStudent: ExpressControllerFunction = async (
     const parsedBody = createStudentSchema.safeParse(req.body);
 
     if (!parsedBody.success) {
+      const failedFields = parsedBody.error.formErrors.fieldErrors;
+
       Object.assign(
         req,
         ResponseHelper.error({
           status: HttpStatusCode.BAD_REQUEST,
           message: 'Erro de validação',
           error: 'error',
-          details: parsedBody.error.errors,
+          details: failedFields,
         })
       );
 
       return next();
     }
 
+    const { name, email, cpf, ra } = parsedBody.data;
+
+    const student = await studentsModel.createStudent({
+      name,
+      email,
+      cpf,
+      ra,
+    });
+
+    if (student instanceof Error || student.insertedId === -1) {
+      throw new Error('Erro ao tentar criar o aluno');
+    }
+
     Object.assign(
       req,
-      ResponseHelper.error({
-        status: HttpStatusCode.NOT_FOUND,
-        message: 'Usuário não encontrado',
-        error: 'error',
-        details: 'Confira o email inserido e tente novamente',
+      ResponseHelper.success({
+        status: HttpStatusCode.OK,
+        message: 'Aluno criado com sucesso',
+        payload: { studentId: student.insertedId },
       })
     );
 
