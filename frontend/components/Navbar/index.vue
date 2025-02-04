@@ -13,7 +13,7 @@ export default {
 </script>
 
 <template>
-  <nav>
+  <nav class="hidden md:block">
     <ul>
       <li v-for="link in links" :key="link.to">
         <NuxtLink :to="link.to">{{ link.text }}</NuxtLink>
